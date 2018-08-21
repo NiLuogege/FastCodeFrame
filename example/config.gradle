@@ -15,6 +15,9 @@ ext {
             testEspresso     : "3.0.2",
             arouterApi       : "1.4.0",
             arouterCompiler  : "1.2.1",
+            rxjava             : '1.2.1',
+            rxandroid          : '1.2.1',
+            rxlifecycle        : '0.6.1',
 
 
     ]
@@ -27,6 +30,13 @@ ext {
             arouter         : [
                     arouterApi     : "com.alibaba:arouter-api:${versions.arouterApi}",
                     arouterCompiler: "com.alibaba:arouter-compiler:${versions.arouterCompiler}"
+            ],
+
+            rx              : [
+                    rxjava   : "io.reactivex:rxjava:${versions.rxjava}",
+                    rxandroid: "io.reactivex:rxandroid:${versions.rxandroid}",
+                    rxlifecycle: "com.trello:rxlifecycle:${versions.rxlifecycle}",
+                    rxlifecycleComponents : "com.trello:rxlifecycle-components:${versions.rxlifecycle}"
             ],
 
             constraintLayout: "com.android.support.constraint:constraint-layout:${versions.constraintLayout}",
