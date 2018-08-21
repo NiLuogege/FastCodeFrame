@@ -12,7 +12,10 @@ ext {
             constraintLayout : "1.1.2",
             junit            : "4.12",
             testRunner       : "1.0.2",
-            testEspresso     : "3.0.2"
+            testEspresso     : "3.0.2",
+            arouterApi       : "1.4.0",
+            arouterCompiler  : "1.2.1",
+
 
     ]
 
@@ -21,10 +24,15 @@ ext {
                     appcompatV7: "com.android.support:appcompat-v7:${versions.supportLibrary}",
             ],
 
+            arouter         : [
+                    arouterApi     : "com.alibaba:arouter-api:${versions.arouterApi}",
+                    arouterCompiler: "com.alibaba:arouter-compiler:${versions.arouterCompiler}"
+            ],
+
             constraintLayout: "com.android.support.constraint:constraint-layout:${versions.constraintLayout}",
-            junit:"junit:junit:${versions.junit}",
-            testRunner:"com.android.support.test:runner:${versions.testRunner}",
-            testEspresso:"com.android.support.test.espresso:espresso-core:${versions.testEspresso}"
+            junit           : "junit:junit:${versions.junit}",
+            testRunner      : "com.android.support.test:runner:${versions.testRunner}",
+            testEspresso    : "com.android.support.test.espresso:espresso-core:${versions.testEspresso}"
 
     ]
 }

@@ -18,6 +18,12 @@ android {
                 cppFlags "-frtti -fexceptions"
             }
         }
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [AROUTER_MODULE_NAME: project.getName()]
+            }
+        }
     }
     buildTypes {
         release {
@@ -46,6 +52,14 @@ dependencies {
     androidTestImplementation deps.testRunner
     androidTestImplementation deps.testEspresso
 
-    //commonres 依赖了 commonSDK
+
+    if (!isModule.toBoolean()) {
+        runtimeOnly project(":module-user")
+    }
+
+    /*commonres 依赖了 commonSDK*/
     implementation project(':commonres')
+
+    /*路由编译器 每个application中都要配置 */
+    annotationProcessor deps.arouter.arouterCompiler
 }

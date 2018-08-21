@@ -20,12 +20,12 @@ android {
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
-//        javaCompileOptions {
-//            annotationProcessorOptions {
-//                arguments = [moduleName: project.getName()]
-//                includeCompileClasspath true
-//            }
-//        }
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [AROUTER_MODULE_NAME: project.getName()]
+                includeCompileClasspath true
+            }
+        }
 
     }
 
@@ -81,13 +81,13 @@ android {
 
 
 dependencies {
-//   if (isModule.toBoolean()){
-//       /*路由编译期 这个得分开配置*/
-//       annotationProcessor deps.arouter.compiler
-//   }else{
-//       /*路由编译期 这个得分开配置*/
-//       compileOnly deps.arouter.compiler
-//   }
+    if (isModule.toBoolean()) {
+        /*路由编译器 这个得分开配置*/
+        annotationProcessor deps.arouter.arouterCompiler
+    } else {
+        /*路由编译器 这个得分开配置*/
+        compileOnly deps.arouter.arouterCompiler
+    }
 
 
 }
