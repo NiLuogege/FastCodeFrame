@@ -6,7 +6,6 @@ if (isModule.toBoolean()) {
 
 android {
     compileSdkVersion versions.compileSdkVersion
-    buildToolsVersion versions.buildToolsVersion
 
     compileOptions {
         targetCompatibility JavaVersion.VERSION_1_8
@@ -16,8 +15,8 @@ android {
     defaultConfig {
         minSdkVersion versions.minSdkVersion///Android 4.4
         targetSdkVersion versions.targetSdkVersion //Android 7.1.1
-        versionCode 1
-        versionName "1.0"
+        versionCode versions.versionCode
+        versionName versions.versionName
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
@@ -79,7 +78,6 @@ android {
 //        }
 //    }
 //}
-
 
 
 dependencies {
