@@ -1,0 +1,30 @@
+//管理全局依赖
+ext {
+    versions = [
+            compileSdkVersion: 28,
+            minSdkVersion    : 15,
+            targetSdkVersion : 28,
+            versionCode      : 1,
+            versionName      : "1.0",
+
+
+            supportLibrary   : "28.0.0-rc01",
+            constraintLayout : "1.1.2",
+            junit            : "4.12",
+            testRunner       : "1.0.2",
+            testEspresso     : "3.0.2"
+
+    ]
+
+    deps = [
+            support         : [
+                    appcompatV7: "com.android.support:appcompat-v7:${versions.supportLibrary}",
+            ],
+
+            constraintLayout: "com.android.support.constraint:constraint-layout:${versions.constraintLayout}",
+            junit:"junit:junit:${versions.junit}",
+            testRunner:"com.android.support.test:runner:${versions.testRunner}",
+            testEspresso:"com.android.support.test.espresso:espresso-core:${versions.testEspresso}"
+
+    ]
+}
