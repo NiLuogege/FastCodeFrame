@@ -29,7 +29,12 @@ android {
 }
 
 dependencies {
-    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    api fileTree(include: ['*.jar'], dir: 'libs')
+
+    api(deps.support.appcompatV7) {
+        exclude module: 'support-annotations'
+    }
+
 //    commonres 依赖 commonSDK
     api project(':commonsdk')
 }

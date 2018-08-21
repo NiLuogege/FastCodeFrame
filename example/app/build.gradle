@@ -38,11 +38,14 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation deps.support.appcompatV7
     implementation deps.constraintLayout
     testImplementation deps.junit
     androidTestImplementation deps.testRunner
     androidTestImplementation deps.testEspresso
+
+    //commonres 依赖了 commonSDK
+    implementation project(':commonres')
 }
