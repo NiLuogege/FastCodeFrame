@@ -56,4 +56,6 @@ dependencies {
 
     /*fastjson*/
     api deps.fastjson
+    /*multidex*/
+    api deps.multidex
 }

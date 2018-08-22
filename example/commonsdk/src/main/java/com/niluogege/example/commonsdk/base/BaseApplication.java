@@ -2,6 +2,7 @@ package com.niluogege.example.commonsdk.base;
 
 import android.app.Application;
 import android.content.Context;
+import android.support.multidex.MultiDex;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.niluogege.example.commonsdk.BuildConfig;
@@ -19,6 +20,8 @@ public class BaseApplication extends Application {
     @Override
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);
+        // you must install multiDex whatever tinker is installed!
+        MultiDex.install(base);
     }
 
     @Override

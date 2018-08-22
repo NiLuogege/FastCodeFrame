@@ -20,7 +20,8 @@ ext {
             rxlifecycle       : '2.2.2',
             retrofit          : "2.4.0",
             interceptorLogging: "3.11.0",
-            fastjson:"1.2.49",
+            fastjson          : "1.2.49",
+            multidex          : "1.0.1",
 
 
     ]
@@ -58,6 +59,7 @@ ext {
             testRunner      : "com.android.support.test:runner:${versions.testRunner}",
             testEspresso    : "com.android.support.test.espresso:espresso-core:${versions.testEspresso}",
             fastjson        : "com.alibaba:fastjson:${versions.fastjson}",//json解析
+            multidex        : "com.android.support:multidex:${versions.multidex}",//multidex 用于解决方法数爆棚
 
     ]
 }
