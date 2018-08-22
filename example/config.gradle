@@ -20,6 +20,7 @@ ext {
             rxlifecycle       : '2.2.2',
             retrofit          : "2.4.0",
             interceptorLogging: "3.11.0",
+            fastjson:"1.2.49",
 
 
     ]
@@ -55,7 +56,8 @@ ext {
             constraintLayout: "com.android.support.constraint:constraint-layout:${versions.constraintLayout}",
             junit           : "junit:junit:${versions.junit}",
             testRunner      : "com.android.support.test:runner:${versions.testRunner}",
-            testEspresso    : "com.android.support.test.espresso:espresso-core:${versions.testEspresso}"
+            testEspresso    : "com.android.support.test.espresso:espresso-core:${versions.testEspresso}",
+            fastjson        : "com.alibaba:fastjson:${versions.fastjson}",//json解析
 
     ]
 }
