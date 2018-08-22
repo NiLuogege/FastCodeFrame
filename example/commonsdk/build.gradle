@@ -44,8 +44,13 @@ dependencies {
     /*rxandroid和rxjava*/
     api deps.rx.rxjava
     api deps.rx.rxandroid
-
     /* RxLifeCycle */
     api deps.rx.rxlifecycle
     api deps.rx.rxlifecycleComponents
+
+    /*retrofit*/
+    api deps.retrofit.retrofit
+    api deps.retrofit.adapterRxjava2
+    api deps.retrofit.converterGson
+    api deps.okhttp3.interceptorLogging
 }
