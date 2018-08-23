@@ -7,12 +7,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.niluogege.example.commonsdk.base.mvp.IPresenter;
 import com.trello.rxlifecycle2.components.support.RxFragment;
 
 /**
  * 懒加载Fragment
  */
-public abstract class BaseLazyFragment extends RxFragment {
+public abstract class BaseLazyFragment<P extends IPresenter> extends RxFragment {
+
+
+    protected P mPresenter = null;//如果当前页面逻辑简单, Presenter 可以为 null
 
     protected View mRootView;
     protected Context mContext;
@@ -63,6 +67,13 @@ public abstract class BaseLazyFragment extends RxFragment {
         }
 
         return mRootView;
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (mPresenter != null) mPresenter.onDestory();
+        mPresenter = null;
     }
 
     public boolean isFirst() {
