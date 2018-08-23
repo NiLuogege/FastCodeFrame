@@ -6,6 +6,10 @@ import android.support.multidex.MultiDex;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.niluogege.example.commonsdk.BuildConfig;
+import com.orhanobut.logger.AndroidLogAdapter;
+import com.orhanobut.logger.FormatStrategy;
+import com.orhanobut.logger.Logger;
+import com.orhanobut.logger.PrettyFormatStrategy;
 
 public class BaseApplication extends Application {
     private static Application app = null;
@@ -30,6 +34,7 @@ public class BaseApplication extends Application {
         app = this;
 
         initARouter();
+        initLogger();
     }
 
 
@@ -55,6 +60,26 @@ public class BaseApplication extends Application {
             ARouter.openDebug();   // 开启调试模式(如果在InstantRun模式下运行，必须开启调试模式！线上版本需要关闭,否则有安全风险)
         }
         ARouter.init(getApplication()); // 尽可能早，推荐在Application中初始化
+    }
+
+    private void initLogger() {
+
+        FormatStrategy formatStrategy = PrettyFormatStrategy.newBuilder()
+                .showThreadInfo(false)  // 显示线程信息
+                .methodCount(0)         // 方法栈打印的个数，默认是2
+                .methodOffset(0)        // 设置调用堆栈的函数偏移值，0的话则从打印该Log的函数开始输出堆栈信息，默认是0
+                .tag(getPackageName())  // 设置tag
+                .build();
+
+        Logger.addLogAdapter(new AndroidLogAdapter(formatStrategy) {
+            @Override
+            public boolean isLoggable(int priority, String tag) {
+                return BuildConfig.LOG_DEBUG;
+            }
+        });
+
+        //将日志缓存大本地 sd卡 的Logger文件夹中
+//        Logger.addLogAdapter(new DiskLogAdapter());
     }
 
 

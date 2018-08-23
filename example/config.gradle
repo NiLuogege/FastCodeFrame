@@ -39,8 +39,8 @@ ext {
             rx              : [
                     rxjava               : "io.reactivex.rxjava2:rxjava:${versions.rxjava}",
                     rxandroid            : "io.reactivex.rxjava2:rxandroid:${versions.rxandroid}",
-                    rxlifecycle          : "com.trello.rxlifecycle2:rxlifecycle:${versions.rxlifecycle}",
-                    rxlifecycleComponents: "com.trello.rxlifecycle2:rxlifecycle-components:${versions.rxlifecycle}"
+                    rxlifecycle          : "com.trello.rxlifecycle2:rxlifecycle:${versions.rxlifecycle}",//对rxjava生命周期进行管理
+                    rxlifecycleComponents: "com.trello.rxlifecycle2:rxlifecycle-components:${versions.rxlifecycle}"//对rxjava生命周期进行管理
             ],
 
             retrofit        : [
@@ -60,6 +60,7 @@ ext {
             testEspresso    : "com.android.support.test.espresso:espresso-core:${versions.testEspresso}",
             fastjson        : "com.alibaba:fastjson:${versions.fastjson}",//json解析
             multidex        : "com.android.support:multidex:${versions.multidex}",//multidex 用于解决方法数爆棚
+            logger          : "com.orhanobut:logger:2.2.0"//logger
 
     ]
 }

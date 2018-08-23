@@ -58,4 +58,6 @@ dependencies {
     api deps.fastjson
     /*multidex*/
     api deps.multidex
+    /*logger*/
+    api deps.logger
 }
