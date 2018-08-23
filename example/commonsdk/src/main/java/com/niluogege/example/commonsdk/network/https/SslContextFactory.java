@@ -1,14 +1,14 @@
 package com.niluogege.example.commonsdk.network.https;
 
 
-import com.zhpan.idea.R;
-import com.zhpan.idea.utils.Utils;
+import android.content.Context;
+
+import com.niluogege.example.commonsdk.R;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.security.KeyStore;
 import java.security.SecureRandom;
-import java.security.cert.Certificate;
 import java.security.cert.CertificateFactory;
 
 import javax.net.ssl.KeyManagerFactory;
@@ -68,9 +68,9 @@ public class SslContextFactory {
      *
      * @return SSLSocketFactory
      */
-    public static SSLSocketFactory getSSLSocketFactoryForTwoWay() {
+    public static SSLSocketFactory getSSLSocketFactoryForTwoWay(Context context) {
         try {
-            InputStream certificate = Utils.getContext().getResources().openRawResource(R.raw.capk);
+            InputStream certificate = context.getResources().openRawResource(R.raw.capk);
             //  CertificateFactory certificateFactory = CertificateFactory.getInstance("X.509", "BC");
             KeyStore keyStore = KeyStore.getInstance(CLIENT_TRUST_KEY);
             keyStore.load(certificate, SELF_CERT_PWD.toCharArray());
@@ -86,7 +86,7 @@ public class SslContextFactory {
 
             //初始化keystore
             KeyStore clientKeyStore = KeyStore.getInstance(CLIENT_TRUST_KEYSTORE);
-            clientKeyStore.load(Utils.getContext().getResources().openRawResource(R.raw.cabks), TRUST_CA_PWD.toCharArray());
+            clientKeyStore.load(context.getResources().openRawResource(R.raw.cabks), TRUST_CA_PWD.toCharArray());
 
             SSLContext sslContext = SSLContext.getInstance(CLIENT_AGREEMENT);
             TrustManagerFactory trustManagerFactory = TrustManagerFactory.
