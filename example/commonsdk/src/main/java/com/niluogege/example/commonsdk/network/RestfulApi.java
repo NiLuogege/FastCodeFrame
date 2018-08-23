@@ -39,6 +39,7 @@ public class RestfulApi {
      */
     public synchronized <T> T getApiService(Class<T> clazz, String baseUrl) {
         Preconditions.checkNotNull(baseUrl, "baseUrl not be null");
+        if (!clazz.isInterface()) throw new RuntimeException("retrofit Service must be Interface");
 
         Retrofit retrofit = null;
 
