@@ -29,7 +29,7 @@ public class DemoActivity extends BaseActivity {
 
     }
 
-    public void click(View view){
+    public void click(View view) {
         RestfulApi.getIdeaApiService().getMezi().compose(this.bindToLifecycle())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -41,17 +41,18 @@ public class DemoActivity extends BaseActivity {
 
                     @Override
                     public void onNext(List<MeiZi> meiZis) {
-                        Logger.e(meiZis.toString(),"dll");
+                        Logger.e("onNext");
+                        Logger.e(meiZis.toString(), "dll");
                     }
 
                     @Override
                     public void onError(Throwable e) {
-
+                        Logger.e("onError");
                     }
 
                     @Override
                     public void onComplete() {
-
+                        Logger.e("onComplete");
                     }
                 });
     }
