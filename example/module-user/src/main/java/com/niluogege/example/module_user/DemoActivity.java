@@ -30,7 +30,7 @@ public class DemoActivity extends BaseActivity {
     }
 
     public void click(View view){
-        RetrofitHelper.getIdeaApiService().getMezi().compose(this.bindToLifecycle())
+        RestfulApi.getIdeaApiService().getMezi().compose(this.bindToLifecycle())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<List<MeiZi>>() {

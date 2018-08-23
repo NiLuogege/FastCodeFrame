@@ -12,20 +12,20 @@ import retrofit2.Retrofit;
  * retorfit管理类 单例类
  */
 
-public class RestfulApi {
+public class RetrofitManager {
 
     private Map<String, Retrofit> retrofitMap = new HashMap<>();
 
 
-    private RestfulApi() {
+    private RetrofitManager() {
     }
 
-    public static synchronized RestfulApi getInstence() {
+    public static synchronized RetrofitManager getInstence() {
         return InnerHolder.manager;
     }
 
     private static class InnerHolder {
-        private static final RestfulApi manager = new RestfulApi();
+        private static final RetrofitManager manager = new RetrofitManager();
     }
 
 
@@ -37,7 +37,7 @@ public class RestfulApi {
      * @param <T>
      * @return
      */
-    public synchronized <T> T getApiService(Class<T> clazz, String baseUrl) {
+    public synchronized <T> T getRetrofit(Class<T> clazz, String baseUrl) {
         Preconditions.checkNotNull(baseUrl, "baseUrl not be null");
         if (!clazz.isInterface()) throw new RuntimeException("retrofit Service must be Interface");
 
