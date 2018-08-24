@@ -1,4 +1,4 @@
-package com.niluogege.example.commonsdk.network;
+package com.niluogege.example.commonsdk.network.exception;
 
 /**
  * Created by niluogege on 2018/8/24.

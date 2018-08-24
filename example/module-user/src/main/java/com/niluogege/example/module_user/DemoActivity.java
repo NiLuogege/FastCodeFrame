@@ -6,7 +6,7 @@ import android.view.View;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.niluogege.example.commonsdk.base.BaseActivity;
-import com.niluogege.example.commonsdk.network.ApiException;
+import com.niluogege.example.commonsdk.network.exception.ApiException;
 import com.niluogege.example.commonsdk.network.DefaultObserver;
 import com.niluogege.example.commonsdk.utils.ARoutePath;
 
