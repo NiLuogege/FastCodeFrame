@@ -66,7 +66,7 @@ public class BaseApplication extends Application {
 
         FormatStrategy formatStrategy = PrettyFormatStrategy.newBuilder()
                 .showThreadInfo(false)  // 显示线程信息
-                .methodCount(0)         // 方法栈打印的个数，默认是2
+                .methodCount(1)         // 方法栈打印的个数，默认是2
                 .methodOffset(0)        // 设置调用堆栈的函数偏移值，0的话则从打印该Log的函数开始输出堆栈信息，默认是0
                 .tag(getPackageName())  // 设置tag
                 .build();

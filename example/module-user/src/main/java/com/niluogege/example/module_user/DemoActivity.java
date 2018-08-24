@@ -6,14 +6,14 @@ import android.view.View;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.niluogege.example.commonsdk.base.BaseActivity;
+import com.niluogege.example.commonsdk.network.ApiException;
+import com.niluogege.example.commonsdk.network.DefaultObserver;
 import com.niluogege.example.commonsdk.utils.ARoutePath;
-import com.orhanobut.logger.Logger;
 
 import java.util.List;
 
-import io.reactivex.Observer;
+import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
 /**
@@ -33,27 +33,46 @@ public class DemoActivity extends BaseActivity {
         RestfulApi.getIdeaApiService().getMezi().compose(this.bindToLifecycle())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<List<MeiZi>>() {
-                    @Override
-                    public void onSubscribe(Disposable d) {
-
+                .flatMap(respose -> {
+                    if (respose != null && respose instanceof BaseRespose) {
+                        return Observable.just(respose.getResults());
+                    } else {
+                        return Observable.error(new ApiException(respose.getCode(), "数据不符合规范"));
                     }
-
+                })
+                .subscribe(new DefaultObserver<List<MeiZi>>() {
                     @Override
-                    public void onNext(List<MeiZi> meiZis) {
-                        Logger.e("onNext");
-                        Logger.e(meiZis.toString(), "dll");
+                    protected void onsuccess(List<MeiZi> meiZis) {
+
                     }
 
                     @Override
                     public void onError(Throwable e) {
-                        Logger.e("onError");
-                    }
-
-                    @Override
-                    public void onComplete() {
-                        Logger.e("onComplete");
+                        super.onError(e);
                     }
                 });
     }
 }
+
+//new Observer<List<MeiZi>>() {
+//@Override
+//public void onSubscribe(Disposable d) {
+//
+//        }
+//
+//@Override
+//public void onNext(List<MeiZi> meiZis) {
+//        Logger.e("onNext");
+//        Logger.e(meiZis.toString(), "dll");
+//        }
+//
+//@Override
+//public void onError(Throwable e) {
+//        Logger.e("onError");
+//        }
+//
+//@Override
+//public void onComplete() {
+//        Logger.e("onComplete");
+//        }
+//        }

@@ -1,5 +1,6 @@
 package com.niluogege.example.module_user;
 
+
 import java.util.List;
 
 import io.reactivex.Observable;
@@ -14,7 +15,7 @@ public interface IdeaApiService {
 
     @Headers("Cache-Control: public, max-age=100")
     @GET("福利/10/1")
-    Observable<List<MeiZi>> getMezi();
+    Observable<BaseRespose<List<MeiZi>>> getMezi();
 
 
 }
