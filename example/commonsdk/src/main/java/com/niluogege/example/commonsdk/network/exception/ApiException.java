@@ -7,7 +7,6 @@ package com.niluogege.example.commonsdk.network.exception;
  */
 
 public class ApiException extends Exception {
-
     private int code;
 
     private String message;

@@ -8,8 +8,10 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.niluogege.example.commonsdk.base.BaseActivity;
 import com.niluogege.example.commonsdk.network.DefaultObserver;
 import com.niluogege.example.commonsdk.network.ProgressHelper;
+import com.niluogege.example.commonsdk.network.RetryWithDelay;
 import com.niluogege.example.commonsdk.network.exception.ApiException;
 import com.niluogege.example.commonsdk.utils.ARoutePath;
+import com.niluogege.example.commonsdk.utils.RxUtils;
 
 import java.util.List;
 
@@ -31,21 +33,46 @@ public class DemoActivity extends BaseActivity {
     }
 
     public void click(View view) {
-        for (int i = 0; i < 50; i++) {
-            doNetWork();
+        for (int i = 0; i < 1; i++) {
+            doNetWork2();
         }
     }
 
     private void doNetWork() {
-        RestfulApi.getIdeaApiService().getMezi().compose(this.bindToLifecycle())
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+        RestfulApi.getIdeaApiService().getMezi()
+                .compose(this.bindToLifecycle())
                 .compose(ProgressHelper.applyProgressBar(DemoActivity.this))
+                .subscribeOn(Schedulers.io())
+                .retryWhen(new RetryWithDelay())
+                .observeOn(AndroidSchedulers.mainThread())
                 .flatMap(respose -> {
-                    if (respose != null && respose instanceof BaseRespose) {
+                    if (respose.success()) {
                         return Observable.just(respose.getResults());
                     } else {
-                        return Observable.error(new ApiException(respose.getCode(), "数据不符合规范"));
+                        return Observable.error(new ApiException(respose.getCode(), respose.getMsg()));
+                    }
+                })
+                .subscribe(new DefaultObserver<List<MeiZi>>() {
+                    @Override
+                    protected void onsuccess(List<MeiZi> meiZis) {
+
+                    }
+
+                    @Override
+                    protected void onFail(Throwable throwable) {
+
+                    }
+                });
+    }
+
+    private void doNetWork2() {
+        RestfulApi.getIdeaApiService().getMezi()
+                .compose(RxUtils.simpleFlow(this))
+                .flatMap(respose -> {
+                    if (respose.success()) {
+                        return Observable.just(respose.getResults());
+                    } else {
+                        return Observable.error(new ApiException(respose.getCode(), respose.getMsg()));
                     }
                 })
                 .subscribe(new DefaultObserver<List<MeiZi>>() {
@@ -64,25 +91,3 @@ public class DemoActivity extends BaseActivity {
 
 }
 
-//new Observer<List<MeiZi>>() {
-//@Override
-//public void onSubscribe(Disposable d) {
-//
-//        }
-//
-//@Override
-//public void onNext(List<MeiZi> meiZis) {
-//        Logger.e("onNext");
-//        Logger.e(meiZis.toString(), "dll");
-//        }
-//
-//@Override
-//public void onError(Throwable e) {
-//        Logger.e("onError");
-//        }
-//
-//@Override
-//public void onComplete() {
-//        Logger.e("onComplete");
-//        }
-//        }
