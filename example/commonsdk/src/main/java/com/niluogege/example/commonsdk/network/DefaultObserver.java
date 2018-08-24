@@ -63,7 +63,5 @@ public abstract class DefaultObserver<T> implements Observer<T> {
      *
      * @param throwable
      */
-    private void onFail(Throwable throwable) {
-
-    }
+    protected abstract void onFail(Throwable throwable);
 }

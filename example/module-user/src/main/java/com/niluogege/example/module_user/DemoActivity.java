@@ -47,8 +47,8 @@ public class DemoActivity extends BaseActivity {
                     }
 
                     @Override
-                    public void onError(Throwable e) {
-                        super.onError(e);
+                    protected void onFail(Throwable throwable) {
+
                     }
                 });
     }
