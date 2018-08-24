@@ -60,4 +60,6 @@ dependencies {
     api deps.multidex
     /*logger*/
     api deps.logger
+    /*dialogplus*/
+    api deps.dialogplus
 }

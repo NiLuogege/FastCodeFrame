@@ -6,8 +6,9 @@ import android.view.View;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.niluogege.example.commonsdk.base.BaseActivity;
-import com.niluogege.example.commonsdk.network.exception.ApiException;
 import com.niluogege.example.commonsdk.network.DefaultObserver;
+import com.niluogege.example.commonsdk.network.ProgressHelper;
+import com.niluogege.example.commonsdk.network.exception.ApiException;
 import com.niluogege.example.commonsdk.utils.ARoutePath;
 
 import java.util.List;
@@ -30,9 +31,16 @@ public class DemoActivity extends BaseActivity {
     }
 
     public void click(View view) {
+        for (int i = 0; i < 50; i++) {
+            doNetWork();
+        }
+    }
+
+    private void doNetWork() {
         RestfulApi.getIdeaApiService().getMezi().compose(this.bindToLifecycle())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
+                .compose(ProgressHelper.applyProgressBar(DemoActivity.this))
                 .flatMap(respose -> {
                     if (respose != null && respose instanceof BaseRespose) {
                         return Observable.just(respose.getResults());
@@ -52,6 +60,8 @@ public class DemoActivity extends BaseActivity {
                     }
                 });
     }
+
+
 }
 
 //new Observer<List<MeiZi>>() {

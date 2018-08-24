@@ -60,7 +60,8 @@ ext {
             testEspresso    : "com.android.support.test.espresso:espresso-core:${versions.testEspresso}",
             fastjson        : "com.alibaba:fastjson:${versions.fastjson}",//json解析
             multidex        : "com.android.support:multidex:${versions.multidex}",//multidex 用于解决方法数爆棚
-            logger          : "com.orhanobut:logger:2.2.0"//logger
+            logger          : "com.orhanobut:logger:2.2.0",//logger
+            dialogplus      : "com.orhanobut:dialogplus:1.11@aar",//dialog Uitls
 
     ]
 }
