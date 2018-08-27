@@ -5,13 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <Button
-        android:id="@+id/sample_text"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:gravity="center"
-        android:onClick="click"
-        android:text="meizi" />
+
 
     <Button
         android:layout_width="match_parent"
