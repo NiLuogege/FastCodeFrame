@@ -4,6 +4,9 @@ if (isModule.toBoolean()) {
     apply plugin: 'com.android.library'
 }
 
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
 android {
     compileSdkVersion versions.compileSdkVersion
 
@@ -89,5 +92,11 @@ dependencies {
         compileOnly deps.arouter.arouterCompiler
     }
 
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
+
+}
+
+repositories {
+    mavenCentral()
 }
