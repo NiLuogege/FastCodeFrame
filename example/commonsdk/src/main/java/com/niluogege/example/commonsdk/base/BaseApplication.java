@@ -6,6 +6,7 @@ import android.support.multidex.MultiDex;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.niluogege.example.commonsdk.BuildConfig;
+import com.niluogege.example.commonsdk.utils.ILog;
 import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.FormatStrategy;
 import com.orhanobut.logger.Logger;
@@ -34,7 +35,8 @@ public class BaseApplication extends Application {
         app = this;
 
         initARouter();
-        initLogger();
+        initLog();
+
     }
 
 
@@ -60,6 +62,12 @@ public class BaseApplication extends Application {
             ARouter.openDebug();   // 开启调试模式(如果在InstantRun模式下运行，必须开启调试模式！线上版本需要关闭,否则有安全风险)
         }
         ARouter.init(getApplication()); // 尽可能早，推荐在Application中初始化
+    }
+
+    private void initLog() {
+        initLogger();
+        ILog.setLogSwitch(BuildConfig.LOG_DEBUG);
+        ILog.setLogToFile(false);
     }
 
     private void initLogger() {
