@@ -1,6 +1,7 @@
 package com.niluogege.example.commonsdk.network;
 
 import com.niluogege.example.commonsdk.base.BaseApplication;
+import com.niluogege.example.commonsdk.network.https.HttpsUtils;
 import com.niluogege.example.commonsdk.network.interceptor.HeaderInterceptor;
 import com.niluogege.example.commonsdk.network.interceptor.HttpCacheInterceptor;
 import com.niluogege.example.commonsdk.network.interceptor.LogInterceptor;
@@ -45,8 +46,8 @@ public class OkhttpFactory {
                 .addNetworkInterceptor(new HttpCacheInterceptor())//缓存的拦截器
                 .addInterceptor(new HttpCacheInterceptor())//缓存的拦截器
                 .connectionPool(new ConnectionPool(5, 5, TimeUnit.MINUTES))//创建链接池，这里和源码保持一直
-                //  .sslSocketFactory(SslContextFactory.getSSLSocketFactoryForTwoWay())  // https认证 如果要使用https且为自定义证书(假的Https证书) 可以去掉这两行注释，并自行配制证书。
-                //  .hostnameVerifier(new SafeHostnameVerifier())
+                .sslSocketFactory(HttpsUtils.getSslSocketFactory(null, null, null))//配置可以使用https
+                .hostnameVerifier((s, sslSession) -> true)//配置可以使用https
                 .cache(cache);//配置缓存
     }
 

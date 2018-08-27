@@ -3,7 +3,7 @@ package com.niluogege.example.commonsdk.network.interceptor;
 
 import android.text.TextUtils;
 
-import com.niluogege.example.commonsdk.network.NetworkUtils;
+import com.niluogege.example.commonsdk.utils.NetworkUtils;
 import com.niluogege.example.commonsdk.utils.ILog;
 
 import java.io.IOException;

@@ -1,4 +1,4 @@
-package com.niluogege.example.commonsdk.network;
+package com.niluogege.example.commonsdk.utils;
 
 import android.content.Context;
 import android.content.Intent;
@@ -8,8 +8,6 @@ import android.net.wifi.WifiManager;
 import android.telephony.TelephonyManager;
 
 import com.niluogege.example.commonsdk.base.BaseApplication;
-import com.niluogege.example.commonsdk.utils.ILog;
-import com.niluogege.example.commonsdk.utils.ShellUtils;
 
 import java.lang.reflect.Method;
 import java.net.InetAddress;
