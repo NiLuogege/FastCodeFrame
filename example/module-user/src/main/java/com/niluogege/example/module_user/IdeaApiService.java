@@ -13,7 +13,6 @@ import retrofit2.http.Headers;
 
 public interface IdeaApiService {
 
-
     /**
      * 获取baseUrl
      */
