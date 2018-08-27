@@ -8,11 +8,19 @@ import com.niluogege.example.commonsdk.network.RetrofitManager;
 
 public class RestfulApi {
     private static IdeaApiService ideaApiService = null;
+    private static IdeaApiService settingApiService = null;
 
     public static IdeaApiService getIdeaApiService() {
         if (ideaApiService == null) {
             ideaApiService = RetrofitManager.getInstence().getRetrofit(IdeaApiService.class, "http://gank.io/api/data/");
         }
         return ideaApiService;
+    }
+
+    public static IdeaApiService getSettingApiService() {
+        if (settingApiService == null) {
+            settingApiService = RetrofitManager.getInstence().getRetrofit(IdeaApiService.class, "https://xhj.aihuishou.com/");
+        }
+        return settingApiService;
     }
 }

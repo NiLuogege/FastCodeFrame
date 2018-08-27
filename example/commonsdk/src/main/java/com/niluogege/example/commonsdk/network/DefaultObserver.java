@@ -41,6 +41,8 @@ public abstract class DefaultObserver<T> implements Observer<T> {
             ToastUtils.show("连接超时,请稍后再试");
         } else if (e instanceof JsonParseException || e instanceof JSONException || e instanceof ParseException) {   //解析错误
             ToastUtils.show("解析服务器响应数据失败");
+        } else {
+            e.printStackTrace();
         }
 
         onFail(e);

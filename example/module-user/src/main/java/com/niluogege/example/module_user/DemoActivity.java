@@ -12,6 +12,8 @@ import com.niluogege.example.commonsdk.network.RetryWithDelay;
 import com.niluogege.example.commonsdk.network.exception.ApiException;
 import com.niluogege.example.commonsdk.utils.ARoutePath;
 import com.niluogege.example.commonsdk.utils.RxUtils;
+import com.niluogege.example.module_user.bean.AppSettingInfo;
+import com.orhanobut.logger.Logger;
 
 import java.util.List;
 
@@ -33,34 +35,32 @@ public class DemoActivity extends BaseActivity {
     }
 
     public void click(View view) {
-        for (int i = 0; i < 1; i++) {
-            doNetWork2();
-        }
+        doNetWork();
     }
 
     private void doNetWork() {
         RestfulApi.getIdeaApiService().getMezi()
                 .compose(this.bindToLifecycle())
-                .compose(ProgressHelper.applyProgressBar(DemoActivity.this))
                 .subscribeOn(Schedulers.io())
                 .retryWhen(new RetryWithDelay())
                 .observeOn(AndroidSchedulers.mainThread())
+                .compose(ProgressHelper.applyProgressBar(DemoActivity.this))
                 .flatMap(respose -> {
-                    if (respose.success()) {
+                    if (!respose.isError()) {
                         return Observable.just(respose.getResults());
                     } else {
-                        return Observable.error(new ApiException(respose.getCode(), respose.getMsg()));
+                        return Observable.error(new ApiException(-1000, "meizi 的 message"));
                     }
                 })
                 .subscribe(new DefaultObserver<List<MeiZi>>() {
                     @Override
                     protected void onsuccess(List<MeiZi> meiZis) {
-
+                        Logger.e("onsuccess");
                     }
 
                     @Override
                     protected void onFail(Throwable throwable) {
-
+                        Logger.e("onFail");
                     }
                 });
     }
@@ -69,21 +69,53 @@ public class DemoActivity extends BaseActivity {
         RestfulApi.getIdeaApiService().getMezi()
                 .compose(RxUtils.simpleFlow(this))
                 .flatMap(respose -> {
-                    if (respose.success()) {
+                    if (!respose.isError()) {
                         return Observable.just(respose.getResults());
                     } else {
-                        return Observable.error(new ApiException(respose.getCode(), respose.getMsg()));
+                        return Observable.error(new ApiException(-1000, "meizi 的 message"));
                     }
                 })
                 .subscribe(new DefaultObserver<List<MeiZi>>() {
                     @Override
                     protected void onsuccess(List<MeiZi> meiZis) {
-
+                        Logger.e("onsuccess");
                     }
 
                     @Override
                     protected void onFail(Throwable throwable) {
+                        Logger.e("onFail");
+                    }
+                });
+    }
 
+
+    public void click2(View view) {
+        getSetting();
+    }
+
+    private void getSetting() {
+        RestfulApi.getSettingApiService().getAppSetting()
+                .compose(this.bindToLifecycle())
+                .subscribeOn(Schedulers.io())
+                .retryWhen(new RetryWithDelay())
+                .observeOn(AndroidSchedulers.mainThread())
+                .compose(ProgressHelper.applyProgressBar(DemoActivity.this))
+                .flatMap(respose -> {
+                    if (respose.success()) {
+                        return Observable.just(respose.getData());
+                    } else {
+                        return Observable.error(new ApiException(respose.getCode(), respose.getMsg()));
+                    }
+                })
+                .subscribe(new DefaultObserver<AppSettingInfo>() {
+                    @Override
+                    protected void onsuccess(AppSettingInfo appSettingInfo) {
+                        Logger.e("onsuccess");
+                    }
+
+                    @Override
+                    protected void onFail(Throwable throwable) {
+                        Logger.e("onFail");
                     }
                 });
     }
