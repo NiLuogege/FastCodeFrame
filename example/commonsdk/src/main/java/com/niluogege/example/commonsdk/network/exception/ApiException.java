@@ -6,7 +6,7 @@ package com.niluogege.example.commonsdk.network.exception;
  * 处理服务器返回数据异常情况
  */
 
-public class ApiException extends Exception {
+public class ApiException extends RuntimeException {
     private int code;
 
     private String message;

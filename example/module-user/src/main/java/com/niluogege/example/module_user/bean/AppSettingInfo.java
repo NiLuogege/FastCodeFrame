@@ -33,4 +33,13 @@ public class AppSettingInfo {
     }
 
     private String piwik_host;
+
+    @Override
+    public String toString() {
+        return "AppSettingInfo{" +
+                "bfa_host='" + bfa_host + '\'' +
+                ", api_host='" + api_host + '\'' +
+                ", piwik_host='" + piwik_host + '\'' +
+                '}';
+    }
 }

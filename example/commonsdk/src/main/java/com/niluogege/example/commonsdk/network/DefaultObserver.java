@@ -1,6 +1,7 @@
 package com.niluogege.example.commonsdk.network;
 
 import com.google.gson.JsonParseException;
+import com.niluogege.example.commonsdk.network.exception.ApiException;
 import com.niluogege.example.commonsdk.utils.ToastUtils;
 
 import org.json.JSONException;
@@ -41,10 +42,11 @@ public abstract class DefaultObserver<T> implements Observer<T> {
             ToastUtils.show("连接超时,请稍后再试");
         } else if (e instanceof JsonParseException || e instanceof JSONException || e instanceof ParseException) {   //解析错误
             ToastUtils.show("解析服务器响应数据失败");
-        } else {
-            e.printStackTrace();
+        } else if (e instanceof ApiException) {
+            ToastUtils.show(e.getLocalizedMessage());
         }
 
+        e.printStackTrace();
         onFail(e);
     }
 

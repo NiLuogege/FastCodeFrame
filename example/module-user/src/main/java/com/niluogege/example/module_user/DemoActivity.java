@@ -11,6 +11,7 @@ import com.niluogege.example.commonsdk.network.ProgressHelper;
 import com.niluogege.example.commonsdk.network.RetryWithDelay;
 import com.niluogege.example.commonsdk.network.exception.ApiException;
 import com.niluogege.example.commonsdk.utils.ARoutePath;
+import com.niluogege.example.commonsdk.utils.ILog;
 import com.niluogege.example.commonsdk.utils.RxUtils;
 import com.niluogege.example.module_user.bean.AppSettingInfo;
 import com.orhanobut.logger.Logger;
@@ -55,7 +56,7 @@ public class DemoActivity extends BaseActivity {
                 .subscribe(new DefaultObserver<List<MeiZi>>() {
                     @Override
                     protected void onsuccess(List<MeiZi> meiZis) {
-                        Logger.e("onsuccess");
+                        ILog.e(meiZis.toString());
                     }
 
                     @Override
@@ -78,7 +79,7 @@ public class DemoActivity extends BaseActivity {
                 .subscribe(new DefaultObserver<List<MeiZi>>() {
                     @Override
                     protected void onsuccess(List<MeiZi> meiZis) {
-                        Logger.e("onsuccess");
+                        ILog.e(meiZis.toString());
                     }
 
                     @Override
@@ -110,7 +111,7 @@ public class DemoActivity extends BaseActivity {
                 .subscribe(new DefaultObserver<AppSettingInfo>() {
                     @Override
                     protected void onsuccess(AppSettingInfo appSettingInfo) {
-                        Logger.e("onsuccess");
+                        ILog.e(appSettingInfo.toString());
                     }
 
                     @Override
@@ -133,7 +134,7 @@ public class DemoActivity extends BaseActivity {
                 .subscribe(new DefaultObserver<AppSettingInfo>() {
                     @Override
                     protected void onsuccess(AppSettingInfo appSettingInfo) {
-                        Logger.e("onsuccess");
+                        ILog.e(appSettingInfo.toString());
                     }
 
                     @Override
@@ -141,6 +142,29 @@ public class DemoActivity extends BaseActivity {
                         Logger.e("onFail");
                     }
                 });
+    }
+
+    public void click3(View view) {
+        RestfulApi.getSettingApiService().getAppSetting2()
+                .compose(RxUtils.simpleFlow(DemoActivity.this))
+                .subscribe(new DefaultObserver<AppSettingInfo>() {
+                    @Override
+                    protected void onsuccess(AppSettingInfo appSettingInfo) {
+                        ILog.e(appSettingInfo.toString());
+                    }
+
+                    @Override
+                    protected void onFail(Throwable throwable) {
+                        Logger.e("onFail");
+                    }
+                });
+    }
+
+
+    public void click4(View view) {
+        getSetting();
+        getSetting2();
+        doNetWork();
     }
 
 

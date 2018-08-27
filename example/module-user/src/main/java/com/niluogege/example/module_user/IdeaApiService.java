@@ -28,4 +28,11 @@ public interface IdeaApiService {
     Observable<BaseRespose<AppSettingInfo>> getAppSetting();
 
 
+    /**
+     * 获取baseUrl
+     */
+    @GET("app/setting")
+    Observable<AppSettingInfo> getAppSetting2();
+
+
 }
