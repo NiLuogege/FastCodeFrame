@@ -15,10 +15,11 @@ import io.reactivex.schedulers.Schedulers;
 public class RxUtils {
 
     public static <T> ObservableTransformer<T, T> simpleFlow(BaseActivity activity) {
-        return upstream -> upstream.compose(activity.bindToLifecycle())
-                .compose(ProgressHelper.applyProgressBar(activity))
+        return upstream -> upstream
+                .compose(activity.bindToLifecycle())
                 .subscribeOn(Schedulers.io())
                 .retryWhen(new RetryWithDelay())
-                .observeOn(AndroidSchedulers.mainThread());
+                .observeOn(AndroidSchedulers.mainThread())
+                .compose(ProgressHelper.applyProgressBar(activity));
     }
 }

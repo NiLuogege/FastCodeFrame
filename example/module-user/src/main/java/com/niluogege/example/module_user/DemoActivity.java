@@ -90,7 +90,7 @@ public class DemoActivity extends BaseActivity {
 
 
     public void click2(View view) {
-        getSetting();
+        getSetting2();
     }
 
     private void getSetting() {
@@ -100,6 +100,29 @@ public class DemoActivity extends BaseActivity {
                 .retryWhen(new RetryWithDelay())
                 .observeOn(AndroidSchedulers.mainThread())
                 .compose(ProgressHelper.applyProgressBar(DemoActivity.this))
+                .flatMap(respose -> {
+                    if (respose.success()) {
+                        return Observable.just(respose.getData());
+                    } else {
+                        return Observable.error(new ApiException(respose.getCode(), respose.getMsg()));
+                    }
+                })
+                .subscribe(new DefaultObserver<AppSettingInfo>() {
+                    @Override
+                    protected void onsuccess(AppSettingInfo appSettingInfo) {
+                        Logger.e("onsuccess");
+                    }
+
+                    @Override
+                    protected void onFail(Throwable throwable) {
+                        Logger.e("onFail");
+                    }
+                });
+    }
+
+    private void getSetting2() {
+        RestfulApi.getSettingApiService().getAppSetting()
+                .compose(RxUtils.simpleFlow(DemoActivity.this))
                 .flatMap(respose -> {
                     if (respose.success()) {
                         return Observable.just(respose.getData());
