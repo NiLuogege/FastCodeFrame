@@ -16,8 +16,8 @@ public class RxUtils {
 
     public static <T> ObservableTransformer<T, T> simpleFlow(BaseActivity activity) {
         return upstream -> upstream
-                .compose(activity.bindToLifecycle())
                 .subscribeOn(Schedulers.io())
+                .compose(activity.bindToLifecycle())//compose方法需要在subscribeOn方法之后使用，因为在测试的过程中发现，将compose方法放在subscribeOn方法之前，如果在被观察者中执行了阻塞方法，比如Thread.sleep()，取消订阅后该阻塞方法不会被中断。
                 .retryWhen(new RetryWithDelay())
                 .observeOn(AndroidSchedulers.mainThread())
                 .compose(ProgressHelper.applyProgressBar(activity));
