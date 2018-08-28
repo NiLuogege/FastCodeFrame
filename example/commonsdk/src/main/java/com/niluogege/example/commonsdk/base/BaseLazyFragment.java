@@ -8,12 +8,13 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.niluogege.example.commonsdk.base.mvp.IPresenter;
+import com.niluogege.example.commonsdk.base.mvp.IView;
 import com.trello.rxlifecycle2.components.support.RxFragment;
 
 /**
  * 懒加载Fragment
  */
-public abstract class BaseLazyFragment<P extends IPresenter> extends RxFragment {
+public abstract class BaseLazyFragment<V extends IView,P extends IPresenter> extends RxFragment {
 
 
     protected P mPresenter = null;//如果当前页面逻辑简单, Presenter 可以为 null
@@ -26,37 +27,18 @@ public abstract class BaseLazyFragment<P extends IPresenter> extends RxFragment 
 
     //--------------------system method callback------------------------//
 
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        isPrepared = true;
-        initPrepare();
-    }
 
     @Override
-    public void setUserVisibleHint(boolean isVisibleToUser) {
-        super.setUserVisibleHint(isVisibleToUser);
-        if (getUserVisibleHint()) {
-            isVisible = true;
-            lazyLoad();
-        } else {
-            isVisible = false;
-            onInvisible();
-        }
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        if (getUserVisibleHint()) {
-            setUserVisibleHint(true);
-        }
+    public void onAttach(Context context) {
+        super.onAttach(context);
     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mContext = getActivity();
+        mPresenter = initPresenter();
+        mPresenter.attach((V)this);
     }
 
     @Nullable
@@ -69,11 +51,65 @@ public abstract class BaseLazyFragment<P extends IPresenter> extends RxFragment 
         return mRootView;
     }
 
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        isPrepared = true;
+        initPrepare();
+    }
+
+
+    @Override
+    public void onStart() {
+        super.onStart();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (getUserVisibleHint()) {
+            setUserVisibleHint(true);
+        }
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+    }
+
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if (mPresenter != null) mPresenter.onDestory();
+        if (mPresenter != null) mPresenter.dettach();
         mPresenter = null;
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (getUserVisibleHint()) {
+            isVisible = true;
+            lazyLoad();
+        } else {
+            isVisible = false;
+            onInvisible();
+        }
     }
 
     public boolean isFirst() {
@@ -99,6 +135,11 @@ public abstract class BaseLazyFragment<P extends IPresenter> extends RxFragment 
         }
         isFirst = false;
     }
+
+    /**
+     * 初始化presenter
+     */
+    protected abstract P initPresenter();
 
 
     /**

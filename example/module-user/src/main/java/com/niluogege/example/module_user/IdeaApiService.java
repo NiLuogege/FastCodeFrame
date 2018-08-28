@@ -1,7 +1,7 @@
 package com.niluogege.example.module_user;
 
 
-import com.niluogege.example.module_user.bean.AppSettingInfo;
+import com.niluogege.example.module_user.mvp.model.entity.setting.AppSettingInfo;
 
 import io.reactivex.Observable;
 import retrofit2.http.GET;

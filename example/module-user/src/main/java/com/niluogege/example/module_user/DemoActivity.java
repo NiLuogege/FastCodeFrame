@@ -6,11 +6,12 @@ import android.view.View;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.niluogege.example.commonsdk.base.BaseActivity;
+import com.niluogege.example.commonsdk.base.mvp.IPresenter;
 import com.niluogege.example.commonsdk.network.DefaultObserver;
 import com.niluogege.example.commonsdk.utils.ARoutePath;
 import com.niluogege.example.commonsdk.utils.ILog;
 import com.niluogege.example.commonsdk.utils.RxUtils;
-import com.niluogege.example.module_user.bean.AppSettingInfo;
+import com.niluogege.example.module_user.mvp.model.entity.setting.AppSettingInfo;
 import com.orhanobut.logger.Logger;
 
 /**
@@ -26,6 +27,10 @@ public class DemoActivity extends BaseActivity {
 
     }
 
+    @Override
+    protected IPresenter initPresenter() {
+        return null;
+    }
 
 
 

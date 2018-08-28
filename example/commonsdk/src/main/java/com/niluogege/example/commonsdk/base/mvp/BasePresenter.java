@@ -1,7 +1,7 @@
 package com.niluogege.example.commonsdk.base.mvp;
 
 
-import com.niluogege.example.commonsdk.utils.Preconditions;
+import java.lang.ref.WeakReference;
 
 /**
  * Created by niluogege on 2018/8/23.
@@ -9,35 +9,23 @@ import com.niluogege.example.commonsdk.utils.Preconditions;
  * 基类 Presenter
  */
 
-public class BasePresenter<V extends IView, M extends IModel> implements IPresenter {
-    protected V mView;
-    protected M mModel;
+public class BasePresenter<V extends IView> implements IPresenter<V> {
+    protected WeakReference<V> mViewRef;
 
-    public BasePresenter() {
-        onStart();
-    }
-
-    public BasePresenter(V view) {
-        Preconditions.checkNotNull(view, "%s cannot be null", IView.class.getName());
-        this.mView = view;
-        onStart();
-    }
-
-    public BasePresenter(V view, M model) {
-        Preconditions.checkNotNull(view, "%s cannot be null", IView.class.getName());
-        Preconditions.checkNotNull(model, "%s cannot be null", IModel.class.getName());
-        this.mView = view;
-        this.mModel = model;
-        onStart();
-    }
 
     @Override
-    public void onStart() {
+    public void attach(V view) {
+        mViewRef = new WeakReference<>(view);
 
     }
 
     @Override
-    public void onDestory() {
-        if (mModel !=null) mModel.onDestroy();
+    public void dettach() {
+        if (mViewRef != null) {
+            mViewRef.clear();
+            mViewRef = null;
+        }
     }
+
+
 }

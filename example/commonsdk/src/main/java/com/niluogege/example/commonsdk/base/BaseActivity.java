@@ -5,12 +5,13 @@ import android.support.annotation.Nullable;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.niluogege.example.commonsdk.base.mvp.IPresenter;
+import com.niluogege.example.commonsdk.base.mvp.IView;
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 
 /**
  * Created by niluogege on 2018/8/22.
  */
-public class BaseActivity<P extends IPresenter> extends RxAppCompatActivity {
+public abstract class BaseActivity<V extends IView, P extends IPresenter<V>> extends RxAppCompatActivity {
 
     protected P mPresenter = null;//如果当前页面逻辑简单, Presenter 可以为 null
 
@@ -19,7 +20,10 @@ public class BaseActivity<P extends IPresenter> extends RxAppCompatActivity {
         super.onCreate(savedInstanceState);
         /*注册ARouter*/
         ARouter.getInstance().inject(this);
+        mPresenter = initPresenter();
+        mPresenter.attach((V) this);
     }
+
 
     @Override
     protected void onStart() {
@@ -44,7 +48,13 @@ public class BaseActivity<P extends IPresenter> extends RxAppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (mPresenter != null) mPresenter.onDestory();
+        if (mPresenter != null) mPresenter.dettach();
         mPresenter = null;
     }
+
+    /**
+     * 初始化presenter
+     */
+    protected abstract P initPresenter();
+
 }

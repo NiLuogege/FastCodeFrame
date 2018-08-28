@@ -7,8 +7,5 @@ package com.niluogege.example.commonsdk.base.mvp;
  */
 
 public class BaseModel implements IModel {
-    @Override
-    public void onDestroy() {
 
-    }
 }

@@ -1,4 +1,4 @@
-package com.niluogege.example.module_user.bean
+package com.niluogege.example.module_user.mvp.model.entity.setting
 
 /**
  * Created by niluogege on 2018/8/27.
