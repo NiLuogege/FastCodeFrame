@@ -17,4 +17,9 @@ public class SettingModel implements SettingContract.Model {
 
         return RestfulApi.getSettingApiService().getAppSetting2();
     }
+
+    @Override
+    public void onDestory() {
+
+    }
 }

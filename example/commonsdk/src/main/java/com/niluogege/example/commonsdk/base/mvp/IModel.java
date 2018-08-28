@@ -6,4 +6,9 @@ package com.niluogege.example.commonsdk.base.mvp;
  */
 public interface IModel {
 
+    /**
+     * 在{@link IPresenter#attach(Object)}中调用
+     */
+    void onDestory();
+
 }

@@ -11,13 +11,12 @@ import com.niluogege.example.module_user.mvp.model.entity.setting.AppSettingInfo
  * Created by niluogege on 2018/8/27.
  */
 
-public class SettingPresenter extends BasePresenter<SettingContract.View> {
-    private SettingModel model = new SettingModel();
+public class SettingPresenter extends BasePresenter<SettingContract.View,SettingModel> {
 
 
     public void initData() {
 
-        model.loadSetting()
+        mModel.loadSetting()
                 .compose(RxUtils.simpleFlow(mViewRef.get()))
                 .subscribe(new DefaultObserver<AppSettingInfo>() {
                     @Override
@@ -30,5 +29,10 @@ public class SettingPresenter extends BasePresenter<SettingContract.View> {
                         mViewRef.get().onLoadFail(throwable);
                     }
                 });
+    }
+
+    @Override
+    protected SettingModel initModel() {
+        return new SettingModel();
     }
 }

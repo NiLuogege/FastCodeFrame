@@ -9,13 +9,15 @@ import java.lang.ref.WeakReference;
  * 基类 Presenter
  */
 
-public class BasePresenter<V extends IView> implements IPresenter<V> {
+public abstract class BasePresenter<V extends IView, M extends IModel> implements IPresenter<V> {
     protected WeakReference<V> mViewRef;
+    protected M mModel;
 
 
     @Override
     public void attach(V view) {
         mViewRef = new WeakReference<>(view);
+        mModel = initModel();
 
     }
 
@@ -25,7 +27,11 @@ public class BasePresenter<V extends IView> implements IPresenter<V> {
             mViewRef.clear();
             mViewRef = null;
         }
+
+        if (mModel!=null) mModel.onDestory();
     }
+
+    protected abstract M initModel();
 
 
 }
