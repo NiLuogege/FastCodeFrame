@@ -48,13 +48,4 @@ public class SettingActivity extends BaseActivity<SettingContract.View, SettingP
         ToastUtils.show(throwable.getLocalizedMessage());
     }
 
-    @Override
-    public void showLoadingDialog() {
-        showLoading();
-    }
-
-    @Override
-    public void dismissLoadingDialog() {
-        dismissLoading();
-    }
 }

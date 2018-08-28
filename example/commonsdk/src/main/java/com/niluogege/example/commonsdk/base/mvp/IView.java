@@ -8,13 +8,4 @@ package com.niluogege.example.commonsdk.base.mvp;
 
 public interface IView {
 
-    /**
-     * 显示加载框
-     */
-    void showLoadingDialog();
-
-    /**
-     * 隐藏加载框
-     */
-    void dismissLoadingDialog();
 }

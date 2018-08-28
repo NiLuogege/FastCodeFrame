@@ -6,9 +6,7 @@ import android.support.annotation.Nullable;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.niluogege.example.commonsdk.base.mvp.IPresenter;
 import com.niluogege.example.commonsdk.base.mvp.IView;
-import com.niluogege.example.commonsdk.network.ProgressHelper;
 import com.niluogege.example.commonsdk.utils.ActivityManager;
-import com.orhanobut.dialogplus.DialogPlus;
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 
 /**
@@ -17,7 +15,6 @@ import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 public abstract class BaseActivity<V extends IView, P extends IPresenter<V>> extends RxAppCompatActivity {
 
     protected P mPresenter = null;//如果当前页面逻辑简单, Presenter 可以为 null
-    private DialogPlus progress;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -60,19 +57,6 @@ public abstract class BaseActivity<V extends IView, P extends IPresenter<V>> ext
         ActivityManager.getInstance().removeActivity(this);
     }
 
-
-    protected void showLoading() {
-        if (progress == null)
-            progress = ProgressHelper.createProgress(this);
-
-        if (!progress.isShowing())
-            progress.show();
-    }
-
-    protected void dismissLoading() {
-        if (progress != null && progress.isShowing())
-            progress.dismiss();
-    }
 
 
     /**
