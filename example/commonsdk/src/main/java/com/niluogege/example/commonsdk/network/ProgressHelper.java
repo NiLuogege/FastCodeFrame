@@ -1,15 +1,14 @@
 package com.niluogege.example.commonsdk.network;
 
-import android.content.Context;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 
 import com.niluogege.example.commonsdk.R;
 import com.niluogege.example.commonsdk.base.BaseActivity;
+import com.niluogege.example.commonsdk.base.mvp.IView;
 import com.niluogege.example.commonsdk.utils.DialogUtils;
 import com.orhanobut.dialogplus.DialogPlus;
-import com.orhanobut.logger.Logger;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
@@ -67,5 +66,12 @@ public class ProgressHelper {
         };
 
         return transformer;
+    }
+
+    public static <T> ObservableTransformer<T, T> applyProgressBar(IView view) {
+        if (view instanceof BaseActivity) {
+            return applyProgressBar((BaseActivity) view);
+        }
+        return null;
     }
 }

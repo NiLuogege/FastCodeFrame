@@ -1,6 +1,7 @@
 package com.niluogege.example.commonsdk.utils;
 
 import com.niluogege.example.commonsdk.base.BaseActivity;
+import com.niluogege.example.commonsdk.base.mvp.IView;
 import com.niluogege.example.commonsdk.network.ProgressHelper;
 import com.niluogege.example.commonsdk.network.RetryWithDelay;
 
@@ -21,5 +22,14 @@ public class RxUtils {
                 .retryWhen(new RetryWithDelay())
                 .observeOn(AndroidSchedulers.mainThread())
                 .compose(ProgressHelper.applyProgressBar(activity));
+    }
+
+    public static <T> ObservableTransformer<T, T> simpleFlow(IView view) {
+        return upstream -> upstream
+                .subscribeOn(Schedulers.io())
+                .retryWhen(new RetryWithDelay())
+                .observeOn(AndroidSchedulers.mainThread())
+                .compose(RxLifecycleUtils.bindToLifecycle(view))
+                .compose(ProgressHelper.applyProgressBar(view));
     }
 }
