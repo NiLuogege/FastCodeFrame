@@ -6,6 +6,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 
 import com.niluogege.example.commonsdk.R;
+import com.niluogege.example.commonsdk.base.BaseActivity;
 import com.niluogege.example.commonsdk.utils.DialogUtils;
 import com.orhanobut.dialogplus.DialogPlus;
 import com.orhanobut.logger.Logger;
@@ -26,23 +27,23 @@ public class ProgressHelper {
 
     private static DialogPlus progress;
 
-    private static DialogPlus createProgress(Context context) {
+    public static DialogPlus createProgress(BaseActivity activity) {
 
-        DialogPlus plus = DialogUtils.createCustomDialog(context,
+        DialogPlus plus = DialogUtils.createCustomDialog(activity,
                 R.layout.dialog_loading_layout,
                 android.R.color.transparent,
                 android.R.color.transparent,
                 false, null, null);
 
         View image = plus.findViewById(R.id.img);
-        Animation animation = AnimationUtils.loadAnimation(context, R.anim.loading_animation);
+        Animation animation = AnimationUtils.loadAnimation(activity, R.anim.loading_animation);
         image.startAnimation(animation);
 
         return plus;
     }
 
 
-    public static <T> ObservableTransformer<T, T> applyProgressBar(Context context) {
+    public static <T> ObservableTransformer<T, T> applyProgressBar(BaseActivity activity) {
         ObservableTransformer transformer = new ObservableTransformer<T, T>() {
 
             @Override
@@ -50,16 +51,14 @@ public class ProgressHelper {
                 return upstream.doOnSubscribe(new Consumer<Disposable>() {
                     @Override
                     public void accept(Disposable disposable) throws Exception {
-                        Logger.e("doOnSubscribe");
                         if (progress == null)
-                            progress = createProgress(context);
+                            progress = createProgress(activity);
                         if (!progress.isShowing())
                             progress.show();
                     }
                 }).doFinally(new Action() {
                     @Override
                     public void run() throws Exception {
-                        Logger.e("doFinally");
                         if (progress != null && progress.isShowing())
                             progress.dismiss();
                     }

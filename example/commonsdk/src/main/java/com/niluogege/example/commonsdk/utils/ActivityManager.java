@@ -60,6 +60,25 @@ public class ActivityManager {
 
 
     /**
+     * 获取activity
+     *
+     * @param activityCanonicalName 页面类的CanonicalName，比如：MainActivity.class.getCanonicalName().
+     * @return
+     */
+    public Activity getActivity(String activityCanonicalName) {
+        if (TextUtils.isEmpty(activityCanonicalName) || mActivityList == null) {
+            return null;
+        }
+        for (Activity activity : mActivityList) {
+            if (activityCanonicalName.equals(activity.getClass().getCanonicalName())) {
+                return activity;
+            }
+        }
+        return null;
+    }
+
+
+    /**
      * 移除Activity
      */
     public void removeActivity(Activity activity) {

@@ -2,12 +2,10 @@ package com.niluogege.example.module_user.mvp.model.business.setting;
 
 import com.niluogege.example.commonsdk.network.DefaultObserver;
 import com.niluogege.example.commonsdk.network.RetryWithDelay;
-import com.niluogege.example.commonsdk.utils.RxUtils;
 import com.niluogege.example.module_user.RestfulApi;
 import com.niluogege.example.module_user.mvp.contract.setting.SettingContract;
 import com.niluogege.example.module_user.mvp.model.entity.setting.AppSettingInfo;
 
-import io.reactivex.Scheduler;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
@@ -19,6 +17,9 @@ public class SettingModel implements SettingContract.Model {
 
 
     public void loadSetting(SettingContract.View view) {
+        if (view != null)
+            view.showLoadingDialog();
+
         RestfulApi.getSettingApiService()
                 .getAppSetting2()
                 .subscribeOn(Schedulers.io())
@@ -35,6 +36,13 @@ public class SettingModel implements SettingContract.Model {
                     protected void onFail(Throwable throwable) {
                         if (view != null)
                             view.onLoadFail(throwable);
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        super.onComplete();
+                        if (view != null)
+                            view.dismissLoadingDialog();
                     }
                 });
     }

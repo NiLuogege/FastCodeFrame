@@ -6,7 +6,6 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.niluogege.example.commonsdk.base.BaseActivity;
-import com.niluogege.example.commonsdk.utils.ILog;
 import com.niluogege.example.commonsdk.utils.ToastUtils;
 import com.niluogege.example.module_user.R;
 import com.niluogege.example.module_user.mvp.contract.setting.SettingContract;
@@ -31,11 +30,11 @@ public class SettingActivity extends BaseActivity<SettingContract.View, SettingP
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.user_activity_setting);
+        tv = findViewById(R.id.tv);
     }
 
     public void click(View view) {
         if (mPresenter != null) mPresenter.initData();
-        tv = findViewById(R.id.tv);
     }
 
 
@@ -47,5 +46,15 @@ public class SettingActivity extends BaseActivity<SettingContract.View, SettingP
     @Override
     public void onLoadFail(Throwable throwable) {
         ToastUtils.show(throwable.getLocalizedMessage());
+    }
+
+    @Override
+    public void showLoadingDialog() {
+        showLoading();
+    }
+
+    @Override
+    public void dismissLoadingDialog() {
+        dismissLoading();
     }
 }
