@@ -3,7 +3,7 @@
 
     <application>
         <activity
-            android:name=".DemoActivity"
+            android:name=".mvp.ui.business.setting.activity.SettingActivity"
             android:screenOrientation="portrait">
         </activity>
 

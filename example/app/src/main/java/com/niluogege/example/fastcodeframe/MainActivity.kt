@@ -1,7 +1,7 @@
 package com.niluogege.example.fastcodeframe
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import com.alibaba.android.arouter.launcher.ARouter
 import com.niluogege.example.commonsdk.utils.ARoutePath
@@ -18,7 +18,7 @@ class MainActivity : AppCompatActivity() {
 
         sample_text.setOnClickListener {
             Log.e("tag", "kakla")
-            ARouter.getInstance().build(ARoutePath.USER_DEMO).navigation()
+            ARouter.getInstance().build(ARoutePath.USER_SETTING).navigation()
         }
     }
 

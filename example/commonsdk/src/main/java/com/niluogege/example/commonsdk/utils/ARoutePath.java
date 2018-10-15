@@ -14,4 +14,9 @@ public interface ARoutePath {
      */
     String USER_DEMO = USER + "/DemoActivity";
 
+    /**
+     * SettingActivity
+     */
+    String USER_SETTING = USER + "/SettingActivity";
+
 }
