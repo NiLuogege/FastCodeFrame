@@ -2,7 +2,7 @@ package com.niluogege.example.commonsdk.base.mvp;
 
 import android.os.Bundle;
 
-import com.niluogege.example.commonsdk.base.BaseActivity;
+import com.niluogege.example.commonsdk.base.MvpBaseActivity;
 import com.niluogege.example.commonsdk.base.BaseLazyFragment;
 
 /**
@@ -14,7 +14,7 @@ import com.niluogege.example.commonsdk.base.BaseLazyFragment;
 public interface IPresenter<V> {
 
     /**
-     * 在{@link BaseActivity#onCreate(Bundle)}}
+     * 在{@link MvpBaseActivity#onCreate(Bundle)}}
      * 或者{@link BaseLazyFragment#onCreate(Bundle)}
      * 中调用
      *
@@ -23,7 +23,7 @@ public interface IPresenter<V> {
     void attach(V view);
 
     /**
-     * 在{@link BaseActivity#onDestroy()}}
+     * 在{@link MvpBaseActivity#onDestroy()}}
      * 或者{@link BaseLazyFragment#onDestroy()}
      * 中调用
      */

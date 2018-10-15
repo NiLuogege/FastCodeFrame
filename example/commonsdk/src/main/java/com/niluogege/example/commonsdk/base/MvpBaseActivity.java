@@ -3,23 +3,22 @@ package com.niluogege.example.commonsdk.base;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
-import com.alibaba.android.arouter.launcher.ARouter;
-import com.niluogege.example.commonsdk.utils.ActivityManager;
-import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
+import com.niluogege.example.commonsdk.base.mvp.IPresenter;
+import com.niluogege.example.commonsdk.base.mvp.IView;
 
 /**
- * Created by niluogege on 2018/10/15.
- * 所有Activity都可用的基类
+ * Created by niluogege on 2018/8/22.
+ * 针对MVP结构的基类
  */
+public abstract class MvpBaseActivity<V extends IView, P extends IPresenter<V>> extends BaseActivity {
 
-public class CommonBaseActivity extends RxAppCompatActivity {
+    protected P mPresenter = null;//如果当前页面逻辑简单, Presenter 可以为 null
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        /*注册ARouter*/
-        ARouter.getInstance().inject(this);
-        /*加入到ActivityManager*/
-        ActivityManager.getInstance().addActivity(this);
+        mPresenter = initPresenter();
+        mPresenter.attach((V) this);
     }
 
 
@@ -46,7 +45,14 @@ public class CommonBaseActivity extends RxAppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        /*从ActivityManager移除*/
-        ActivityManager.getInstance().removeActivity(this);
+        if (mPresenter != null) mPresenter.dettach();
+        mPresenter = null;
     }
+
+
+    /**
+     * 初始化presenter
+     */
+    protected abstract P initPresenter();
+
 }
