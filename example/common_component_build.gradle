@@ -6,6 +6,7 @@ if (isModule.toBoolean()) {
 
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'com.jakewharton.butterknife'
 
 android {
     compileSdkVersion versions.compileSdkVersion
@@ -87,9 +88,13 @@ dependencies {
     if (isModule.toBoolean()) {
         /*路由编译器 这个得分开配置*/
         annotationProcessor deps.arouter.arouterCompiler
+        /*butterknife编译器 这个得分开配置*/
+        annotationProcessor deps.butterknife.compiler
     } else {
         /*路由编译器 这个得分开配置*/
         compileOnly deps.arouter.arouterCompiler
+        /*butterknife编译器 这个得分开配置*/
+        compileOnly deps.butterknife.compiler
     }
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"

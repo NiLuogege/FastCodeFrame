@@ -62,4 +62,6 @@ dependencies {
     api deps.logger
     /*dialogplus*/
     api deps.dialogplus
+    /*butterknife*/
+    api deps.butterknife.api
 }

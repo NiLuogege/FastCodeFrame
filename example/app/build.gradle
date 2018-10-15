@@ -4,6 +4,8 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
 
+apply plugin: 'com.jakewharton.butterknife'
+
 android {
     compileSdkVersion versions.compileSdkVersion
     defaultConfig {
@@ -62,4 +64,6 @@ dependencies {
 
     /*路由编译器 每个application中都要配置 */
     annotationProcessor deps.arouter.arouterCompiler
+    /*butterknife编译器 每个application中都要配置*/
+    annotationProcessor deps.butterknife.compiler
 }

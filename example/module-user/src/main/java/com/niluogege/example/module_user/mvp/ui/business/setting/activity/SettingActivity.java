@@ -6,11 +6,11 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.niluogege.example.commonsdk.R2;
 import com.niluogege.example.commonsdk.base.MvpBaseActivity;
 import com.niluogege.example.commonsdk.utils.ARoutePath;
 import com.niluogege.example.commonsdk.utils.ToastUtils;
 import com.niluogege.example.module_user.R;
+import com.niluogege.example.module_user.R2;
 import com.niluogege.example.module_user.mvp.contract.setting.SettingContract;
 import com.niluogege.example.module_user.mvp.model.entity.setting.AppSettingInfo;
 import com.niluogege.example.module_user.mvp.presenter.setting.SettingPresenter;
@@ -23,7 +23,7 @@ import butterknife.BindView;
 
 @Route(path = ARoutePath.USER_SETTING)
 public class SettingActivity extends MvpBaseActivity<SettingContract.View, SettingPresenter> implements SettingContract.View {
-    @BindView(R.id.tv)
+    @BindView(R2.id.tv)
     TextView tv;
 
     @Override

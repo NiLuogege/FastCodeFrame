@@ -16,7 +16,7 @@ import butterknife.OnClick;
  */
 
 public class MainActivity2 extends BaseActivity {
-    @BindView(R.id.btn)
+    @BindView(R2.id.btn)
     Button btn;
 
     @Override
@@ -24,7 +24,7 @@ public class MainActivity2 extends BaseActivity {
         return R.layout.activity_main2;
     }
 
-    @OnClick(R.id.btn)
+    @OnClick(R2.id.btn)
     public void onClick() {
         startActivity(new Intent(this, MainActivity.class));
     }

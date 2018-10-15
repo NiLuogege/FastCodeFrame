@@ -22,6 +22,7 @@ ext {
             interceptorLogging: "3.11.0",
             fastjson          : "1.2.49",
             multidex          : "1.0.1",
+            butterknife       : "9.0.0-rc1",
 
 
     ]
@@ -53,6 +54,13 @@ ext {
             okhttp3         : [
                     interceptorLogging: "com.squareup.okhttp3:logging-interceptor:${versions.interceptorLogging}",//okhttp日志打印
             ],
+
+            butterknife     : [
+                    api     : "com.jakewharton:butterknife:${versions.butterknife}",
+                    compiler: "com.jakewharton:butterknife-compiler:${versions.butterknife}"
+            ],
+
+
 
             constraintLayout: "com.android.support.constraint:constraint-layout:${versions.constraintLayout}",
             junit           : "junit:junit:${versions.junit}",
