@@ -10,6 +10,7 @@ import com.example.commonservice.user.bean.UserInfo;
 import com.example.commonservice.user.service.UserInfoInterface;
 import com.niluogege.example.commonsdk.base.BaseActivity;
 import com.niluogege.example.commonsdk.utils.arouter.ARouteOrderPath;
+import com.niluogege.example.commonsdk.utils.arouter.ARouterServicePath;
 import com.niluogege.example.module_user.R;
 import com.niluogege.example.module_user.R2;
 
@@ -30,9 +31,15 @@ public class DemoActivity extends BaseActivity {
         return R.layout.order_activity_demo;
     }
 
-    @OnClick(R2.id.btn)
-    void onClick() {
+    @OnClick(R2.id.btn_type)
+    void onClick1() {
         UserInfo userInfo = ARouter.getInstance().navigation(UserInfoInterface.class).getUserInfo();
-        tv_service_text.setText(userInfo.toString());
+        tv_service_text.setText(userInfo.toString()+" btn_type");
+    }
+
+    @OnClick(R2.id.btn_name)
+    void onClick2() {
+        UserInfo userInfo = ((UserInfoInterface) ARouter.getInstance().build(ARouterServicePath.USERINFOSERVICE).navigation()).getUserInfo();
+        tv_service_text.setText(userInfo.toString()+" btn_name");
     }
 }

@@ -5,10 +5,22 @@
     android:orientation="vertical">
 
     <Button
-        android:id="@+id/btn"
+        android:id="@+id/btn_type"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:text="点我" />
+        android:text="ByType" />
+
+    <Button
+        android:id="@+id/btn_name"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="ByName" />
+
+    <Button
+        android:id="@+id/btn_single"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="BySingle" />
 
     <TextView
         android:id="@+id/tv_service_text"

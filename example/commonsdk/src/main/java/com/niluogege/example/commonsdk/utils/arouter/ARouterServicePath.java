@@ -15,4 +15,7 @@ public interface ARouterServicePath {
 
     /*UserInfoServiceImpl*/
     String USERINFOSERVICE = SERVICE + "/userInfo";
+
+    /*SingleService*/
+    String SINGLE = SERVICE + "/Single";
 }
