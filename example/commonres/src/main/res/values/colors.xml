@@ -3,4 +3,6 @@
     <color name="public_colorPrimary">#3F51B5</color>
     <color name="public_colorPrimaryDark">#303F9F</color>
     <color name="public_colorAccent">#FF4081</color>
+
+    <color name="public_dialog_bg_color">#80000000</color>
 </resources>

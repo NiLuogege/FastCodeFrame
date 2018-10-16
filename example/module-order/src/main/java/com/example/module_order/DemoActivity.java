@@ -9,10 +9,9 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.example.commonservice.user.bean.UserInfo;
 import com.example.commonservice.user.service.UserInfoInterface;
 import com.niluogege.example.commonsdk.base.BaseActivity;
+import com.niluogege.example.commonsdk.utils.DialogUtils;
 import com.niluogege.example.commonsdk.utils.arouter.ARouteOrderPath;
 import com.niluogege.example.commonsdk.utils.arouter.ARouterServicePath;
-import com.niluogege.example.module_user.R;
-import com.niluogege.example.module_user.R2;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -34,12 +33,17 @@ public class DemoActivity extends BaseActivity {
     @OnClick(R2.id.btn_type)
     void onClick1() {
         UserInfo userInfo = ARouter.getInstance().navigation(UserInfoInterface.class).getUserInfo();
-        tv_service_text.setText(userInfo.toString()+" btn_type");
+        tv_service_text.setText(userInfo.toString() + " btn_type");
     }
 
     @OnClick(R2.id.btn_name)
     void onClick2() {
         UserInfo userInfo = ((UserInfoInterface) ARouter.getInstance().build(ARouterServicePath.USERINFOSERVICE).navigation()).getUserInfo();
-        tv_service_text.setText(userInfo.toString()+" btn_name");
+        tv_service_text.setText(userInfo.toString() + " btn_name");
+    }
+
+    @OnClick(R2.id.btn_dialog)
+    void onClick3() {
+        DialogUtils.createCommonDialog(this, R.layout.order_dialog_demo, null).show();
     }
 }
