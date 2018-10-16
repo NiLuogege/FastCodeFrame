@@ -7,7 +7,7 @@ import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.niluogege.example.commonsdk.base.MvpBaseActivity;
-import com.niluogege.example.commonsdk.utils.ARoutePath;
+import com.niluogege.example.commonsdk.utils.arouter.ARouteUserPath;
 import com.niluogege.example.commonsdk.utils.ToastUtils;
 import com.niluogege.example.module_user.R;
 import com.niluogege.example.module_user.R2;
@@ -21,7 +21,7 @@ import butterknife.BindView;
  * Created by niluogege on 2018/8/27.
  */
 
-@Route(path = ARoutePath.USER_SETTING)
+@Route(path = ARouteUserPath.USER_SETTING)
 public class SettingActivity extends MvpBaseActivity<SettingContract.View, SettingPresenter> implements SettingContract.View {
     @BindView(R2.id.tv)
     TextView tv;

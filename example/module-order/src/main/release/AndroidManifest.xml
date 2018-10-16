@@ -3,6 +3,7 @@
 
     <application>
 
+        <activity android:name="com.example.module_order.DemoActivity" />
 
     </application>
 </manifest>

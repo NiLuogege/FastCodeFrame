@@ -1,4 +1,6 @@
 apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdkVersion versions.compileSdkVersion
@@ -24,8 +26,6 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
-    resourcePrefix "public_" //给 Module 内的资源名增加前缀, 避免资源名冲突
-
 }
 
 dependencies {
@@ -34,4 +34,9 @@ dependencies {
     api(deps.support.appcompatV7) {
         exclude module: 'support-annotations'
     }
+
+    //提供arouterApi
+    compileOnly deps.arouter.arouterApi
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }

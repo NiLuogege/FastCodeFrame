@@ -1,9 +1,9 @@
-package com.niluogege.example.commonsdk.utils;
+package com.niluogege.example.commonsdk.utils.arouter;
 
 /**
  * 路由路径配置
  */
-public interface ARoutePath {
+public interface ARouteUserPath {
     /**
      * 组名
      */
@@ -18,5 +18,6 @@ public interface ARoutePath {
      * SettingActivity
      */
     String USER_SETTING = USER + "/SettingActivity";
+
 
 }

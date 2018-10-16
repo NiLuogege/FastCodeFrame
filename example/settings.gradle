@@ -1,1 +1,1 @@
-include ':app', ':commonsdk', ':commonres', ':module-user', ':module-order'
+include ':app', ':commonsdk', ':commonres', ':module-user', ':module-order', ':commonservice'

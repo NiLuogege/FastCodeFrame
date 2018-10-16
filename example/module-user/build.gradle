@@ -12,6 +12,6 @@ dependencies {
     androidTestImplementation deps.testRunner
     androidTestImplementation deps.testEspresso
 
-    //依赖 commonres
-    api project(':commonres')
+    //依赖 commonsdk
+    api project(':commonsdk')
 }
