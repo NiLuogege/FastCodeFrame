@@ -46,8 +46,15 @@ android {
 }
 
 dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+
+
+
     /**
      * 这里要加上 其他组件
+     *
+     *在宿主 App 中使用 implementation 依赖业务组件, 业务组件的代码就会完全暴露给宿主 App, 不利于代码的隔离
+     *使用 runtimeOnly 依赖业务组件, 可实现业务组件的代码在编译时对宿主 App 不可见, 仅在运行时对宿主 App 可见
      */
     if (!isModule.toBoolean()) {
         runtimeOnly project(":module-user")
@@ -58,7 +65,6 @@ dependencies {
     implementation project(':commonsdk')
 
 
-    implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation deps.support.appcompatV7
     implementation deps.constraintLayout

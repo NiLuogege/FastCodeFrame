@@ -2,13 +2,12 @@ package com.niluogege.example.fastcodeframe;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.widget.Button;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.niluogege.example.commonsdk.base.BaseActivity;
 import com.niluogege.example.commonsdk.utils.arouter.ARouteOrderPath;
+import com.niluogege.example.commonsdk.utils.arouter.ARouteUserPath;
 
-import butterknife.BindView;
 import butterknife.OnClick;
 
 
@@ -17,17 +16,21 @@ import butterknife.OnClick;
  */
 
 public class MainActivity2 extends BaseActivity {
-    @BindView(R2.id.btn)
-    Button btn;
 
     @Override
     protected int initContentView(@Nullable Bundle savedInstanceState) {
         return R.layout.activity_main2;
     }
 
-    @OnClick(R2.id.btn)
+    @OnClick(R2.id.btn_user)
     public void onClick() {
-//        startActivity(new Intent(this, MainActivity.class));
+        ARouter.getInstance().build(ARouteUserPath.USER_SETTING).navigation();
+
+    }
+
+    @OnClick(R2.id.btn_order)
+    public void onClick1() {
         ARouter.getInstance().build(ARouteOrderPath.ORDER_DEMO).navigation();
+
     }
 }
