@@ -41,8 +41,8 @@ public class OkhttpFactory {
                 .connectTimeout(TIMEOUT_CONNECT, TimeUnit.SECONDS)//连接超时时间
                 .readTimeout(TIMEOUT_READ, TimeUnit.SECONDS)//读取中断时等待超时时间
                 .writeTimeout(TIMEOUT_WRITE, TimeUnit.SECONDS)//写入中断时等待超时时间
-                .addInterceptor(new HeaderInterceptor())//设置请求头拦截器
-                .addInterceptor(new LogInterceptor())//设置log拦截器
+                .addNetworkInterceptor(new HeaderInterceptor())//设置请求头拦截器
+                .addNetworkInterceptor(new LogInterceptor())//设置log拦截器
                 .addNetworkInterceptor(new HttpCacheInterceptor())//缓存的拦截器
                 .addInterceptor(new HttpCacheInterceptor())//缓存的拦截器
                 .connectionPool(new ConnectionPool(5, 5, TimeUnit.MINUTES))//创建链接池，这里和源码保持一直
