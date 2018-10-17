@@ -6,6 +6,7 @@ import android.support.multidex.MultiDex;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.niluogege.example.commonsdk.BuildConfig;
+import com.niluogege.example.commonsdk.base.proxy.ProxyManager;
 import com.niluogege.example.commonsdk.utils.ILog;
 import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.FormatStrategy;
@@ -14,6 +15,7 @@ import com.orhanobut.logger.PrettyFormatStrategy;
 
 public class BaseApplication extends Application {
     private static Application app = null;
+    private ProxyManager proxyManager;
 
 
     /**
@@ -25,6 +27,10 @@ public class BaseApplication extends Application {
     @Override
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);
+        proxyManager = new ProxyManager(base);
+        if (proxyManager != null) {
+            proxyManager.attachBaseContext(base);
+        }
         // you must install multiDex whatever tinker is installed!
         MultiDex.install(base);
     }
@@ -34,6 +40,10 @@ public class BaseApplication extends Application {
         super.onCreate();
         app = this;
 
+        if (proxyManager != null) {
+            proxyManager.onCreate(app);
+        }
+
         initARouter();
         initLog();
 
@@ -41,13 +51,30 @@ public class BaseApplication extends Application {
 
 
     /**
-     * 在模拟环境中程序终止会被调用
+     * 内存不足时会调用
+     *
+     * @param level
+     */
+    @Override
+    public void onTrimMemory(int level) {
+        super.onTrimMemory(level);
+
+        if (proxyManager != null) {
+            proxyManager.onTrimMemory(app, level);
+        }
+    }
+
+    /**
+     * 会在app关闭的时候调用,但是就像onDestroy()一样,不能保证一定会被调用
      */
     @Override
     public void onTerminate() {
         super.onTerminate();
-    }
 
+        if (proxyManager != null) {
+            proxyManager.onTerminate(app);
+        }
+    }
 
     public static Application getApplication() {
         return app;

@@ -12,6 +12,8 @@ import com.niluogege.example.commonsdk.base.BaseActivity;
 import com.niluogege.example.commonsdk.utils.DialogUtils;
 import com.niluogege.example.commonsdk.utils.arouter.ARouteOrderPath;
 import com.niluogege.example.commonsdk.utils.arouter.ARouterServicePath;
+import com.niluogege.example.module_user.R;
+import com.niluogege.example.module_user.R2;
 
 import butterknife.BindView;
 import butterknife.OnClick;

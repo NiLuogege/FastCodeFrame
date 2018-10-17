@@ -4,8 +4,11 @@
     <application>
         <activity
             android:name=".mvp.ui.business.setting.activity.SettingActivity"
-            android:screenOrientation="portrait">
-        </activity>
+            android:screenOrientation="portrait"></activity>
+
+        <meta-data
+            android:name="com.niluogege.example.module_user.GlobalAppConfig"
+            android:value="AppConfig" />
 
     </application>
 </manifest>

@@ -5,5 +5,9 @@
 
         <activity android:name="com.example.module_order.DemoActivity" />
 
+        <meta-data
+            android:name="com.example.module_order.GlobalAppConfig"
+            android:value="AppConfig" />
+
     </application>
 </manifest>
