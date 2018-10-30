@@ -2,6 +2,7 @@ package com.example.module_order;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.view.View;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
@@ -30,20 +31,37 @@ public class DemoActivity extends BaseActivity {
         return R.layout.order_activity_demo;
     }
 
-    @OnClick(R2.id.btn_type)
-    void onClick1() {
-        UserInfo userInfo = ARouter.getInstance().navigation(UserInfoInterface.class).getUserInfo();
-        tv_service_text.setText(userInfo.toString() + " btn_type");
+
+    @OnClick({R2.id.btn_type, R2.id.btn_name, R2.id.btn_dialog})
+    public void onViewClicked(View view) {
+
+        int i = view.getId();
+        if (i == R.id.btn_type) {
+            UserInfo userInfo = ARouter.getInstance().navigation(UserInfoInterface.class).getUserInfo();
+            tv_service_text.setText(userInfo.toString() + " btn_type");
+        } else if (i == R.id.btn_name) {
+            UserInfo userInfo1 = ((UserInfoInterface) ARouter.getInstance().build(ARouterServicePath.USERINFOSERVICE).navigation()).getUserInfo();
+            tv_service_text.setText(userInfo1.toString() + " btn_name");
+        } else if (i == R.id.btn_dialog) {
+            DialogUtils.createCommonDialog(this, R.layout.order_dialog_demo, null).show();
+        }
+
     }
 
-    @OnClick(R2.id.btn_name)
-    void onClick2() {
-        UserInfo userInfo = ((UserInfoInterface) ARouter.getInstance().build(ARouterServicePath.USERINFOSERVICE).navigation()).getUserInfo();
-        tv_service_text.setText(userInfo.toString() + " btn_name");
-    }
-
-    @OnClick(R2.id.btn_dialog)
-    void onClick3() {
-        DialogUtils.createCommonDialog(this, R.layout.order_dialog_demo, null).show();
-    }
+//    @OnClick(R2.id.btn_type)
+//    void onClick1() {
+//        UserInfo userInfo = ARouter.getInstance().navigation(UserInfoInterface.class).getUserInfo();
+//        tv_service_text.setText(userInfo.toString() + " btn_type");
+//    }
+//
+//    @OnClick(R2.id.btn_name)
+//    void onClick2() {
+//        UserInfo userInfo = ((UserInfoInterface) ARouter.getInstance().build(ARouterServicePath.USERINFOSERVICE).navigation()).getUserInfo();
+//        tv_service_text.setText(userInfo.toString() + " btn_name");
+//    }
+//
+//    @OnClick(R2.id.btn_dialog)
+//    void onClick3() {
+//        DialogUtils.createCommonDialog(this, R.layout.order_dialog_demo, null).show();
+//    }
 }
