@@ -10,8 +10,10 @@ import java.util.Map;
  * Created by niluogege on 2018/11/5.
  */
 public class FunctionManager {
-    private static Map<String, FunctionWithParamAndResult> withParamAndResultMap = new HashMap<>();//有参数有返回值的回掉容器
-    private static Map<String, FunctionWithParamOnly> withParamOnlyMap = new HashMap<>();//只有参数的回掉容器
+    private Map<String, FunctionWithParamAndResult> withParamAndResultMap = new HashMap<>();//有参数有返回值的回掉容器
+    private Map<String, FunctionWithParamOnly> withParamOnlyMap = new HashMap<>();//只有参数的回掉容器
+    private Map<String, FunctionWithResultOnly> withResultOnlyMap = new HashMap<>();//只有返回值的回掉容器
+    private Map<String, FunctionNoParamNoResult> noParamNoResultMap = new HashMap<>();//没有参数没有返回值的回掉容器
 
     private FunctionManager() {
     }
@@ -40,6 +42,26 @@ public class FunctionManager {
     public FunctionManager addFunc(FunctionWithParamOnly function) {
         if (function != null) {
             withParamOnlyMap.put(function.functionName, function);
+        }
+        return this;
+    }
+
+    /**
+     * 只有返回值 类型 添加回掉
+     */
+    public FunctionManager addFunc(FunctionWithResultOnly function) {
+        if (function != null) {
+            withResultOnlyMap.put(function.functionName, function);
+        }
+        return this;
+    }
+
+    /**
+     * 没有参数没有返回值 类型 添加回掉
+     */
+    public FunctionManager addFunc(FunctionNoParamNoResult function) {
+        if (function != null) {
+            noParamNoResultMap.put(function.functionName, function);
         }
         return this;
     }
@@ -104,6 +126,61 @@ public class FunctionManager {
                 FunctionWithParamOnly function = withParamOnlyMap.get(funcName);
                 if (function != null) {
                     function.function(param);
+                } else {
+                    throw new FunctionException("Has no this function" + funcName);
+                }
+            } else {
+                ILog.e("no this Key!");
+            }
+        } else {
+            throw new FunctionException("funcName is empty!");
+        }
+    }
+
+
+    /**
+     * 执行 只有返回值 回掉方法
+     *
+     * @param funcName 方法名
+     * @param clz      返回类型
+     * @param <Result> 返回类型
+     * @return
+     */
+    public <Result> Result invokeFunc(String funcName, Class<Result> clz) {
+        if (StringUtils.isNotEmpty(funcName)) {
+            if (withResultOnlyMap.containsKey(funcName)) {
+                FunctionWithResultOnly function = withResultOnlyMap.get(funcName);
+                if (function != null) {
+
+                    if (clz != null) {
+                        return clz.cast(function.function());
+                    } else {
+                        return (Result) function.function();
+                    }
+                } else {
+                    throw new FunctionException("Has no this function" + funcName);
+                }
+            } else {
+                ILog.e("no this Key!");
+            }
+        } else {
+            throw new FunctionException("funcName is empty!");
+        }
+        return null;
+    }
+
+
+    /**
+     * 执行 没有参数没有返回值 回掉方法
+     *
+     * @param funcName 方法名
+     */
+    public void invokeFunc(String funcName) {
+        if (StringUtils.isNotEmpty(funcName)) {
+            if (noParamNoResultMap.containsKey(funcName)) {
+                FunctionNoParamNoResult function = noParamNoResultMap.get(funcName);
+                if (function != null) {
+                    function.function();
                 } else {
                     throw new FunctionException("Has no this function" + funcName);
                 }

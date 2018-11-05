@@ -51,6 +51,17 @@ public class MainActivity2 extends BaseActivity {
         FunctionManager.getInstance().invokeFunc(InterTest.WithParamOnly, "两个");
     }
 
+    @OnClick(R2.id.btn_4)
+    public void on4() {
+        String s = FunctionManager.getInstance().invokeFunc(InterTest.WithResultOnly, String.class);
+        ToastUtils.show(s);
+    }
+
+    @OnClick(R2.id.btn_5)
+    public void on5() {
+        FunctionManager.getInstance().invokeFunc(InterTest.NoParamNoResult);
+    }
+
     @OnClick(R2.id.btn_2)
     public void on2() {
         interTest.remove();
