@@ -15,6 +15,7 @@ public class FunctionManager {
     private Map<String, FunctionWithResultOnly> withResultOnlyMap = new HashMap<>();//只有返回值的回掉容器
     private Map<String, FunctionNoParamNoResult> noParamNoResultMap = new HashMap<>();//没有参数没有返回值的回掉容器
 
+
     private FunctionManager() {
     }
 
@@ -69,14 +70,23 @@ public class FunctionManager {
     /**
      * 移除回掉
      */
-    public FunctionManager removeFunc(Function function) {
+    public void removeFunc(Function function) {
         if (function != null) {
+            String functionName = function.functionName;
             if (function instanceof FunctionWithParamAndResult) {//有参数有返回值
-                withParamAndResultMap.remove(function.functionName);
+                if (withParamAndResultMap.containsKey(functionName))
+                    withParamAndResultMap.remove(functionName);
+            } else if (function instanceof FunctionWithParamOnly) {//有参数无返回值
+                if (withParamOnlyMap.containsKey(functionName))
+                    withParamOnlyMap.remove(functionName);
+            } else if (function instanceof FunctionWithResultOnly) {//无参数有返回值
+                if (withResultOnlyMap.containsKey(functionName))
+                    withResultOnlyMap.remove(functionName);
+            } else if (function instanceof FunctionNoParamNoResult) {//无参数无返回值
+                if (noParamNoResultMap.containsKey(functionName))
+                    noParamNoResultMap.remove(functionName);
             }
         }
-
-        return this;
     }
 
     /**
